@@ -22,18 +22,22 @@ Recipe = [
 ]
 
 class inventory:
-    def __init__(self, ItemName, Item, Count):
-        self.storage = {ItemName : {"Item" : Item, "Quantity": Count}}
-# Dictionary, first parameter ItemName (String), Second Ingredient Dict
-
+    def __init__(self):
+         self.storage = {}
+    # Dictionary, first parameter ItemName (String), Second Ingredient Dict
     def add_item(self, name, Item, Count):
-         self.storage[name] = {"Item" : Item, "Quantity": Count}
+        if (name in self.storage):
+             self.storage[name]["Quantity"] += Count
+        else:
+             self.storage[name] = {"Item" : Item, "Quantity": Count}
 
 corn = Ingredient("corn", 0.50, 7)
 corn.change_price(1.0)
 corn.change_shelf_life(10)
 print(corn.price, corn.shelf_life)
-simon_storage = inventory("corn", corn, 3)
+simon_storage = inventory()
+simon_storage.add_item("corn", corn, 3)
 print(simon_storage.storage["corn"]["Item"].price)
 simon_storage.add_item("sugar", Ingredient("sugar", 0.25, 20), 10)
+simon_storage.add_item("corn", corn, 20)
 print(simon_storage.storage)

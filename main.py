@@ -31,6 +31,18 @@ class inventory:
         else:
              self.storage[name] = {"Item" : Item, "Quantity": Count}
 
+    def remove_item (self, name, Count):
+        if (name in self.storage):
+              # Can either remove the item completely, or change count to 0
+            if Count <= self.storage[name]["Quantity"]:
+                self.storage[name]["Quantity"] -= Count
+                print(f"{Count} {name} were removed from inventory")
+            else:
+                cur_count = self.storage[name]["Quantity"]
+                print(f"There are only {cur_count} {name} left, we are unable to remove {Count}")
+        else:
+             print(f"There are no {name} in the inventory, please enter another item") 
+
 corn = Ingredient("corn", 0.50, 7)
 corn.change_price(1.0)
 corn.change_shelf_life(10)
@@ -40,4 +52,6 @@ simon_storage.add_item("corn", corn, 3)
 print(simon_storage.storage["corn"]["Item"].price)
 simon_storage.add_item("sugar", Ingredient("sugar", 0.25, 20), 10)
 simon_storage.add_item("corn", corn, 20)
+print(simon_storage.storage)
+simon_storage.remove_item("corn", 50)
 print(simon_storage.storage)

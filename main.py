@@ -49,8 +49,8 @@ class Inventory:
 
 
 def check_inventory(food, cur_recipe, cur_storage):
+    valid_recipe = True
     if food in cur_recipe:
-        valid_recipe = True
         for key, value in cur_recipe[food].items():
             cur_item_name = key
             cur_item_count = value
@@ -65,10 +65,13 @@ def check_inventory(food, cur_recipe, cur_storage):
                     valid_recipe = False
             else:
                 print(f"There are no {cur_item_name} in your inventory")
+                valid_recipe = False
     else:
         print(f"We do not have any recipe for {food} in our cook book")
+        valid_recipe = False
 
     if valid_recipe == False:
         print("This is not a valid recipe")
     else:
         print("This is a valid recipe")
+    return valid_recipe

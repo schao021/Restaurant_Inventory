@@ -10,18 +10,29 @@ class Ingredient:
     def change_shelf_life(self, newShelfLife):
             self.shelf_life = newShelfLife
 
-Recipe = [
-     {
-          "Food_Name": "Pancake",
-          "ingredient_needed" : {"flour" : 2, 
-                                  "milk": 3, 
-                                  "egg": 2, 
-                                  "butter" : 1, 
-                                  "sugar": 5}
-     }
-]
+# Recipe = {
+#           "Pancake": {"flour" : 2, 
+#                       "milk": 3, 
+#                       "egg": 2, 
+#                       "butter" : 1,
+#           }
+#      }
 
-class inventory:
+class Recipe:
+    def __init__ (self):
+          self.Recipe_List = {}
+
+    def add_recipe(self, food_name, Food_Recipe):
+        if food_name in self.Recipe_List:
+            print(f"There are already a recipe for {food_name}")
+        else:
+            self.Recipe_List[food_name] = Food_Recipe
+
+    def remove_recipe(self, food_name):
+        self.Recipe_List.pop(food_name, f"There are no {food_name} in the cook book")
+
+
+class Inventory:
     def __init__(self):
          self.storage = {}
     # Dictionary, first parameter ItemName (String), Second Ingredient Dict
@@ -43,15 +54,4 @@ class inventory:
         else:
              print(f"There are no {name} in the inventory, please enter another item") 
 
-corn = Ingredient("corn", 0.50, 7)
-corn.change_price(1.0)
-corn.change_shelf_life(10)
-print(corn.price, corn.shelf_life)
-simon_storage = inventory()
-simon_storage.add_item("corn", corn, 3)
-print(simon_storage.storage["corn"]["Item"].price)
-simon_storage.add_item("sugar", Ingredient("sugar", 0.25, 20), 10)
-simon_storage.add_item("corn", corn, 20)
-print(simon_storage.storage)
-simon_storage.remove_item("corn", 50)
-print(simon_storage.storage)
+

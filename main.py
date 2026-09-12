@@ -10,14 +10,6 @@ class Ingredient:
     def change_shelf_life(self, newShelfLife):
             self.shelf_life = newShelfLife
 
-# Recipe = {
-#           "Pancake": {"flour" : 2, 
-#                       "milk": 3, 
-#                       "egg": 2, 
-#                       "butter" : 1,
-#           }
-#      }
-
 class Recipe:
     def __init__ (self):
           self.Recipe_List = {}
@@ -55,3 +47,28 @@ class Inventory:
              print(f"There are no {name} in the inventory, please enter another item") 
 
 
+
+def check_inventory(food, cur_recipe, cur_storage):
+    if food in cur_recipe:
+        valid_recipe = True
+        for key, value in cur_recipe[food].items():
+            cur_item_name = key
+            cur_item_count = value
+            print(cur_item_name,cur_item_count)
+            if cur_item_name in cur_storage.storage:
+                in_inventory = cur_storage.storage[cur_item_name]
+                if in_inventory["Quantity"] >= cur_item_count:
+                    print(f"Your inventory have {in_inventory['Quantity']} in stock, you have enough units")
+                else:
+                    in_inventory = cur_storage.storage[cur_item_name]
+                    print(f"There are not enough {cur_item_name}, the inventory only has {in_inventory['Quantity']} {cur_item_name}")
+                    valid_recipe = False
+            else:
+                print(f"There are no {cur_item_name} in your inventory")
+    else:
+        print(f"We do not have any recipe for {food} in our cook book")
+
+    if valid_recipe == False:
+        print("This is not a valid recipe")
+    else:
+        print("This is a valid recipe")

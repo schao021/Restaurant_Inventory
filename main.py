@@ -75,3 +75,15 @@ def check_inventory(food, cur_recipe, cur_storage):
     else:
         print("This is a valid recipe")
     return valid_recipe
+
+# Condition: check_inventory is true
+def cook_recipe(food, cur_recipe, cur_storage):
+    for key,value in cur_recipe[food].items():
+        cur_item_name = key
+        cur_item_count = value
+        in_inventory = cur_storage.storage[cur_item_name]
+        in_inventory["Quantity"] -= cur_item_count
+        print(f"{cur_item_count} {cur_item_name} has been removed, now you have {in_inventory['Quantity']} remaining")
+    # After creating the food, must store in cur_storage (price and store life default 20 for now)
+    final_food = Ingredient(food, 20, 20)
+    return final_food

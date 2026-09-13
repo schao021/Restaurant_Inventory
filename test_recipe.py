@@ -32,10 +32,6 @@ simon_recipe.add_recipe("Pancake", {"flour" : 2,
 cur_recipe = simon_recipe.Recipe_List
 food = "Pancake"
 
-# print(cur_recipe[food])
-if check_inventory(food, cur_recipe, simon_storage) == True:
-    simon_storage.add_item(food, cook_recipe(food, cur_recipe, simon_storage),1)
-else:
-    print("Did not cook food")
-
+# print(cur_recipe[food])    
+simon_storage.add_item(food, cook_recipe(food, cur_recipe, simon_storage),1)
 print(simon_storage.storage)
